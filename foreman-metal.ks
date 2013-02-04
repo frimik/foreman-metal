@@ -45,6 +45,9 @@ system-config-firewall-base
 
 # or root won't mount:
 libsysfs
+
+# for consistent device naming
+biosdevname
 %end
 
 %post
