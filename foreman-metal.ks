@@ -48,6 +48,9 @@ dracut
 # for consistent device naming
 biosdevname
 
+# Convenient access to epel-release
+epel-release
+
 %end
 
 %post --nochroot
