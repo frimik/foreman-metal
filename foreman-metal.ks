@@ -3,51 +3,58 @@ keyboard us
 timezone UTC
 auth --useshadow --enablemd5
 selinux --permissive
-firewall --disabled
+firewall --enabled
 
 repo --name=base    --baseurl=http://mirror.centos.org/centos/6/os/$basearch
 repo --name=updates --baseurl=http://mirror.centos.org/centos/6/updates/$basearch
 repo --name=extras  --baseurl=http://mirror.centos.org/centos/6/extras/$basearch
 repo --name=epel    --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=x86_64
 repo --name=live    --baseurl=http://www.nanotechnologies.qc.ca/propos/linux/centos-live/$basearch/live
-repo --name=metal   --baseurl=http://static.tmtowtdi.se/yum/foreman-metal/6/x86_64
 #repo --name=a-rbel    --baseurl=http://rbel.frameos.org/stable/el6/$basearch
 #repo --name=a-wsman   --baseurl=http://download.opensuse.org/repositories/Openwsman/CentOS_CentOS-6
 
-%packages
-bash
-kernel
+skipx
+
+%packages --excludedocs --nobase
+#@core
 syslinux
 passwd
-chkconfig
-authconfig
 rootfiles
 dhclient
-comps-extras
-vim-enhanced
-openssh-clients
-openssh-server
 OpenIPMI-tools
 OpenIPMI
-rpcbind
-nfs-utils
 wget
 dmidecode
-libxml2
-curl
-git
-ruby
 puppet
-parted
+curl
 yum
-foreman-metalbuild
 system-config-firewall-base
+-*-firmware
+-b43-openfwwf
+-cyrus-sasl
+-postfix
+-rsyslog
+-sudo
+-curl
+
+# install later if needed
+-perl
 
 # or root won't mount:
 libsysfs
+device-mapper
+dracut
 
 # for consistent device naming
 biosdevname
+
+%end
+
+%post --nochroot
+for bootfile in EFI/boot/isolinux.cfg EFI/boot/grub.conf isolinux/isolinux.cfg EFI/boot/boot.conf
+do
+  sed -i -e's/ rhgb//g; s/ quiet//g'  $LIVE_ROOT/$bootfile
+done
 %end
 
 %post
