@@ -1,0 +1,5 @@
+#!gpxe
+kernel <%= @settings[:ipxe][:baseurl] %><%= @settings[:ipxe][:vmlinuz] %> rootflags=loop root=live:/foreman-metal.iso rootfstype=auto ro liveimg rd_NO_LUKS rd_NO_MD rd_NO_DM ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${netX/dns} BOOTIF=${netX/mac}
+initrd <%= @settings[:ipxe][:baseurl] %><%= @settings[:ipxe][:initrd] %>
+boot
+

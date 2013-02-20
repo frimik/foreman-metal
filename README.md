@@ -12,10 +12,15 @@ Mock/Chroot will be added later. There is an
 Usage
 -----
 
-Create the image with:
-    ./create.sh
+Create the images with:
+
+    sudo rake images
 
 Copy the tftpboot images and foreman-metal.ipxe file to your tftpboot server
+
+If you want to create an x86 image on an x86_64 system, try:
+
+    sudo setarch i686 rake images
 
 Foreman
 -------

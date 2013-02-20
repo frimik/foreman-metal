@@ -3,3 +3,4 @@ srpm
 tftpboot
 repo
 *.iso
+foreman-metal.ipxe

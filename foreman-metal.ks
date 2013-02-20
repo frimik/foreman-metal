@@ -5,13 +5,13 @@ auth --useshadow --enablemd5
 selinux --permissive
 firewall --enabled
 
-repo --name=base    --baseurl=http://mirror.centos.org/centos/6/os/$basearch
-repo --name=updates --baseurl=http://mirror.centos.org/centos/6/updates/$basearch
-repo --name=extras  --baseurl=http://mirror.centos.org/centos/6/extras/$basearch
-repo --name=epel    --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-6&arch=x86_64
-repo --name=live    --baseurl=http://www.nanotechnologies.qc.ca/propos/linux/centos-live/$basearch/live
-#repo --name=a-rbel    --baseurl=http://rbel.frameos.org/stable/el6/$basearch
-#repo --name=a-wsman   --baseurl=http://download.opensuse.org/repositories/Openwsman/CentOS_CentOS-6
+repo --name=base-$releasever-$basearch    --baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch
+repo --name=updates-$releasever-$basearch --baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch
+repo --name=extras-$releasever-$basearch  --baseurl=http://mirror.centos.org/centos/$releasever/extras/$basearch
+repo --name=epel-$releasever-$basearch --mirrorlist=http://mirrors.fedoraproject.org/mirrorlist?repo=epel-$releasever&arch=$basearch
+repo --name=live-$releasever-$basearch    --baseurl=http://www.nanotechnologies.qc.ca/propos/linux/centos-live/$basearch/live
+#repo --name=a-rbel-$releasever-$basearch    --baseurl=http://rbel.frameos.org/stable/el$releasever/$basearch
+#repo --name=a-wsman-$releasever-$basearch   --baseurl=http://download.opensuse.org/repositories/Openwsman/CentOS_CentOS-$releasever
 
 skipx
 
