@@ -2,3 +2,4 @@ results
 srpm
 tftpboot
 repo
+*.iso

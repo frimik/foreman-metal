@@ -1,0 +1,5 @@
+#!gpxe
+kernel http://static.tmtowtdi.se/foreman/metal/tftpboot/vmlinuz0 rootflags=loop root=live:/foreman-metal.iso rootfstype=auto ro liveimg rd_NO_LUKS rd_NO_MD rd_NO_DM ip=${netX/ip} netmask=${netX/netmask} gateway=${netX/gateway} dns=${netX/dns} BOOTIF=${netX/mac}
+initrd http://static.tmtowtdi.se/foreman/metal/tftpboot/initrd0.img
+boot
+
