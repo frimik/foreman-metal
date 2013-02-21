@@ -54,14 +54,27 @@ epel-release
 %end
 
 %post --nochroot
+echo "Running %post --nochroot"
+echo "LIVE_ROOT is $LIVE_ROOT"
+
 for bootfile in EFI/boot/isolinux.cfg EFI/boot/grub.conf isolinux/isolinux.cfg EFI/boot/boot.conf
 do
-  sed -i -e's/ rhgb//g; s/ quiet//g'  $LIVE_ROOT/$bootfile
+  if [ -f $LIVE_ROOT/$bootfile ]; then
+    echo "Modifying $bootfile"
+    sed -i -e's/ rhgb//g; s/ quiet//g'  $LIVE_ROOT/$bootfile
+  fi
 done
+
+exit 0
 %end
 
 %post
-rpm --rebuilddb
+echo "Running %post"
+/bin/rpm --rebuilddb
+
+# Increase the Overlay size from 512MB to 1024MB
+/usr/bin/perl -pi -e 's/(^\s*dd if.*of=\/overlay.*)(512)/${1}1024/' \
+  /usr/share/dracut/modules.d/90dmsquash-live/dmsquash-live-root
 
 exit 0
 %end

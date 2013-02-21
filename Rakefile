@@ -28,5 +28,27 @@ file 'foreman-metal.ipxe' => ['foreman-metal.ipxe.erb'] do
       puts "Wrote #{bytes} byte(s) to foreman-metal.ipxe"
     end
   end
+
+end
+
+desc "Generate iso image (please invoke with 'sudo rake iso')"
+task :iso do
+  system('/usr/bin/livecd-creator --tmpdir=/tmp --cache /var/cache/live --verbose \
+      --config foreman-metal.ks --title="Foreman Metal" --product "Metal" \
+      -f foreman-metal --compression-type=gzip')
+  puts "Status: #{$?}"
+
+end
+
+desc "Generate pxe images (please invoke with 'sudo rake pxe')"
+task :pxe do
+  system('/usr/bin/livecd-iso-to-pxeboot foreman-metal.iso')
+  puts "Status: #{$?}"
+end
+
+desc "Generate images (iso + pxe)"
+task :images do
+  Rake::Task[:iso].invoke
+  Rake::Task[:pxe].invoke
 end
 
