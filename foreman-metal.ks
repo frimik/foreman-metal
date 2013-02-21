@@ -3,7 +3,7 @@ keyboard us
 timezone UTC
 auth --useshadow --enablemd5
 selinux --permissive
-firewall --enabled
+firewall --enabled --ssh
 
 repo --name=base-$releasever-$basearch    --baseurl=http://mirror.centos.org/centos/$releasever/os/$basearch
 repo --name=updates-$releasever-$basearch --baseurl=http://mirror.centos.org/centos/$releasever/updates/$basearch
