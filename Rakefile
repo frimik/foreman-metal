@@ -1,3 +1,7 @@
+require 'erb'
+require 'yaml'
+
+@settings = YAML.load_file('conf/settings.yaml')
 
 task :default => [:welcome]
 
@@ -16,10 +20,6 @@ end
 
 desc "Generate foreman-metal.ipxe"
 file 'foreman-metal.ipxe' => ['foreman-metal.ipxe.erb'] do
-  require 'erb'
-  require 'yaml'
-
-  @settings = YAML.load_file('conf/settings.yaml')
 
   ipxe = ERB.new(File.read("foreman-metal.ipxe.erb"), nil, '%<>')
   File.open('foreman-metal.ipxe', File::RDWR|File::CREAT, 0644) do |f|
@@ -33,9 +33,9 @@ end
 
 desc "Generate iso image (please invoke with 'sudo rake iso')"
 task :iso do
-  system('/usr/bin/livecd-creator --tmpdir=/tmp --cache /var/cache/live --verbose \
-      --config foreman-metal.ks --title="Foreman Metal" --product "Metal" \
-      -f foreman-metal --compression-type=gzip')
+  system("/usr/bin/livecd-creator --releasever=#{@settings[:live][:releasever]} --tmpdir=/tmp --cache /var/cache/live --verbose \
+      --config foreman-metal.ks --title='Foreman Metal' --product 'Metal' \
+      -f foreman-metal --compression-type=gzip")
   puts "Status: #{$?}"
 
 end
