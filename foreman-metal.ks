@@ -29,6 +29,8 @@ puppet
 curl
 yum
 system-config-firewall-base
+openssh-server
+openssh-clients
 -*-firmware
 -b43-openfwwf
 -cyrus-sasl
