@@ -1,7 +1,7 @@
 require 'erb'
 require 'yaml'
 
-@settings = YAML.load_file('conf/settings.yaml')
+@settings = YAML.load_file('config/settings.yaml')
 
 task :default => [:welcome]
 
